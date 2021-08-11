@@ -7,6 +7,7 @@ import About from "../pages/about";
 import Users from "../pages/users";
 import Home from "../pages/home";
 import Login from "../pages/login";
+import Verification from "../pages/verification";
 
 export default function Routes() {
 
@@ -17,6 +18,9 @@ export default function Routes() {
             </Route>
             <Route path="/users">
                 <Users/>
+            </Route>
+            <Route path="/verification">
+                <Verification/>
             </Route>
             <Route path="/login">
                 <Login/>

@@ -6,6 +6,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import Login from "./pages/login";
 import {useDispatch, useSelector} from "react-redux";
 import {connexion} from "./actions";
+import NavigationBar from "./pages/navigation";
 
 const App = () => {
     const isLogged = useSelector(state => state.isLogged);
@@ -20,7 +21,7 @@ const App = () => {
 
     return (
         <Router>
-            {isLogged ? <Routes /> : <Login />}
+            {isLogged ? <div><NavigationBar /><Routes /> </div>: <Login />}
         </Router>
     );
 };

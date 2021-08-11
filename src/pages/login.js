@@ -3,10 +3,12 @@ import axios from "axios";
 import {useState, useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {connexion} from "../actions";
+import "../App.css";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     //const isLogged = useSelector(state => state.isLogged);
     const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrorLogin(false);
+        setLoading(true);
 
         const data = JSON.stringify({
             'username': username,
@@ -44,10 +47,12 @@ const Login = () => {
                 } else {
                     setErrorLogin(true);
                 }
+                setLoading(false);
             })
             .catch(function (error) {
                 console.log(error);
                 setErrorLogin(true);
+                setLoading(false);
             });
     };
 
@@ -64,33 +69,36 @@ const Login = () => {
         }
     }, );*/
 
-    return <div className="container">
-        <br/>
-        <br/>
-        <h2>Connexion</h2>
-        <br/>
+    return <div className="login-page">
+        <div  className="container">
+            <div className="login-container">
+                <h2>CONNEXION</h2>
+                <br/>
+                <form action="#" method="post" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>Identifiant</label>
+                        <input type="text" placeholder="identifiant" value={username}
+                               onChange={e => setUsername(e.target.value)} className="form-control"/>
+                    </div>
+                    <div className="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" placeholder="Mot de passe" value={password}
+                               onChange={e => setPassword(e.target.value)} className="form-control"/>
+                    </div>
+                    <br/>
+                    <div className="form-group">
+                        {loading ? <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only"/>
+                        </div> :<button type="submit" disabled={!validateForm()} className="btn btn-primary">Connexion</button> }
+                    </div>
+                    <br/>
+                    {errorLogin ? <div className="alert alert-danger" role="alert">
+                        Nom d'utlisateur ou mot de passe incorrect
+                    </div> : <span/>}
+                </form>
+            </div>
+        </div>
 
-        <form action="#" method="post" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Identifiant</label>
-                <input type="text" placeholder="identifiant" value={username}
-                       onChange={e => setUsername(e.target.value)} className="form-control"/>
-            </div>
-            <div className="form-group">
-                <label>Mot de passe</label>
-                <input type="password" placeholder="Mot de passe" value={password}
-                       onChange={e => setPassword(e.target.value)} className="form-control"/>
-            </div>
-            <br/>
-            <div className="form-group">
-                <button type="submit" disabled={!validateForm()} className="btn btn-primary">Connexion</button>
-            </div>
-            <br/>
-            <br/>
-            {errorLogin ? <div className="alert alert-danger" role="alert">
-                Nom d'utlisateur ou mot de passe incorrect
-            </div> : <span/>}
-        </form>
     </div>;
 };
 

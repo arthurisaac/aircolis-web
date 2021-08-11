@@ -4,7 +4,7 @@ import {url} from "../utils/constantes";
 import DataTable, { defaultThemes } from 'react-data-table-component';
 import "../App.css";
 
-class Users extends Component {
+class Verification extends Component {
     state = {
         users: [],
         filterText: "",
@@ -174,7 +174,7 @@ class Users extends Component {
 
         return <div className="container">
             <br/>
-            <h1 className="display-4">Gestion utilisateurs</h1>
+            <h1 className="display-4">Demande de vérification de compte</h1>
             <br/>
             <div className="card">
                 <DataTable
@@ -193,4 +193,4 @@ class Users extends Component {
     }
 }
 
-export default Users;
+export default Verification;
